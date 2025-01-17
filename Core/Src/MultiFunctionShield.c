@@ -166,8 +166,6 @@ void MultiFunctionShield_WriteNumberToSegment(uint8_t digit)
 	HAL_GPIO_WritePin(SevenSeg_LATCH_GPIO_Port, SevenSeg_LATCH_Pin,GPIO_PIN_SET);
 	}
 
-
-
 void Display_Waiting(void)
 	{
 	SEGMENT_VALUE[0] = SEGMENT_MINUS;
@@ -180,9 +178,6 @@ void Display_All(void)
 	{
 	MultiFunctionShield_Display(8888);
 	}
-
-
-
 
 
 void MultiFunctionShield__ISRFunc(void)

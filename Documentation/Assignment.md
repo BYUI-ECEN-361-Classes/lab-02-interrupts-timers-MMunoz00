@@ -75,9 +75,13 @@ Note the speed of D1/D2/D3 - they should seem like a 3-bit binary counter.
 
 Once you have all three LEDs blinking properly, answer the following questions:
 
-1. At what frequency does D1 toggle? [*answer here*]
+1. At what frequency does D1 toggle? 
 
-2. Do all LEDs toggle at *exactly* the same time? [*answer here*]
+	1Hz
+
+2. Do all LEDs toggle at *exactly* the same time? 
+
+	[*All of the LEDs do not toggle at exactly the same time, EVERY time, but there is a particular moment when all three LEDs toggle OFF at the exact same time, and that is approximately 3secs after displaying a binary 7, when toggling off to display a binary 0.*]
 
 ## Part 2: Changing the clock tree
 
@@ -92,11 +96,11 @@ Change the clock tree to adjust the rates at which the LEDs blink.
 
 ## Part 2 Questions (3 pts)
 
-1. What has happened to the speed of the timers? [*answer here*]
+1. What has happened to the speed of the timers? [*The timers have slowed down dramatically.*]
 
-2. What is the new frequency of LED D1? [*answer here*]
+2. What is the new frequency of LED D1? [*250mHz*]
 
-3. When we changed the frequency, did the Seven-Segment Light update rate change?  (hint, look at the clocks driving the APB1, APB2 buses and which timers are on which bus.  Recall that the Seven-Segment timer is Tim17) [*answer here*]
+3. When we changed the frequency, did the Seven-Segment Light update rate change?  (hint, look at the clocks driving the APB1, APB2 buses and which timers are on which bus.  Recall that the Seven-Segment timer is Tim17) [*The update rate did change as the Seven Segment Display is linked to APB2 which was prescaled down by a factor of 8, taking its original frequency from 1kHz to 125Hz, however since we cannot perceive the original or new update frequency with the human eye, it appears as if nothing has changed.*]
 
 ## Part 3: Reaction Timer (5 pts)
 
@@ -139,4 +143,4 @@ For Seven Segment Display Functions, check the MultiFunctionShield.h header file
 
 * Currently, the reaction tester can have a wait time anywhere between 0 and 7000 milliseconds, Implement a minimum wait time in such a way that doesn't change the potential maximum wait time
 
-If you do any of these items - just mention what and how it worked, [*here*].
+If you do any of these items - just mention what and how it worked, [*I changed the go lights to be all four LEDS, D1..4 by reseting the pins when pressing the start button, and then setting all of the pins when go is displayed.*].

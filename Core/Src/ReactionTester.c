@@ -29,6 +29,9 @@
 #include <stdbool.h>
 #include "MultiFunctionShield.h"
 extern TIM_HandleTypeDef htim3;  // Points to the timer structure   Timer3 is the Reaction Timer
+extern TIM_HandleTypeDef htim6;
+extern TIM_HandleTypeDef htim7;
+extern TIM_HandleTypeDef htim16;
 extern void MX_TIM3_Init(void);	// To reset the timer
 extern bool got_start_button;
 extern bool got_stop_button;
@@ -68,9 +71,22 @@ void got_start()
 
 	  /**************** STUDENT TO FILL IN START HERE ********************/
 		// Step 1
+		HAL_TIM_Base_Stop_IT(&htim6);
+		HAL_TIM_Base_Stop_IT(&htim7);
+		HAL_TIM_Base_Stop_IT(&htim16);
+		HAL_GPIO_WritePin(GPIOA, LED_D1_Pin|LED_D2_Pin|LED_D3_Pin, GPIO_PIN_SET);
+
+		Display_Waiting();
 		// Step 2
+		HAL_Delay(rand_millisec);
 		// Step 3
+		Display_All();
+		HAL_GPIO_TogglePin(LED_D1_GPIO_Port, LED_D1_Pin);
+		HAL_GPIO_TogglePin(LED_D2_GPIO_Port, LED_D2_Pin);
+		HAL_GPIO_TogglePin(LED_D3_GPIO_Port, LED_D3_Pin);
+		HAL_GPIO_TogglePin(LED_D4_GPIO_Port, LED_D4_Pin);
 		// Step 4
+		HAL_TIM_Base_Start_IT(&htim3);
 	  /**************** STUDENT TO FILL IN END  HERE ********************/
 	}
 void got_stop()
@@ -86,12 +102,12 @@ void got_stop()
 
 	  /**************** STUDENT TO FILL IN START HERE ********************/
       // 1.) Stop the random timer // Random timer is timer3
-
+		HAL_TIM_Base_Stop_IT(&htim3);
       // 2.) Read the value of the timer -- this step provided
 		last_reaction_time_in_millisec = __HAL_TIM_GetCounter(&htim3) / 10; // Why is it divide by 10?
 
 	  // 3.) Display the value
-
+		MultiFunctionShield_Display(last_reaction_time_in_millisec);
 
       /**************** STUDENT TO FILL IN END HERE ********************/
 		// Keep the best time in a global variable
